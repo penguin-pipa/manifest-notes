@@ -22,6 +22,12 @@
            revision="celerity" />
 
   <!-- PenguinOS forks with the aospa-pipa deltas for pipa -->
+  <remove-project name="Project-PenguinOS/system_core" />
+  <project path="system/core"
+           name="penguin-pipa/system_core"
+           remote="github"
+           revision="celerity" />
+
   <remove-project name="Project-PenguinOS/frameworks_base" />
   <project path="frameworks/base"
            name="penguin-pipa/frameworks_base"
