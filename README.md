@@ -91,6 +91,41 @@ project that is not checked out yet, so the device tree is never downloaded.
 ./rom-build.sh pipa -r           # repo sync before building
 ```
 
+### Signing keys (release builds)
+
+The default build uses the AOSP test keys. For a release build, generate a full
+4096-bit key set (platform + one key per APEX) on the build host **after a first
+build**, because the APEX list comes from `out/`:
+
+```bash
+mkdir -p ~/.android-certs
+cp development/tools/make_key ~/.android-certs/
+sed -i 's|2048|4096|g' ~/.android-certs/make_key
+
+subject='/C=US/ST=State/L=City/O=Org/OU=Org/CN=Org/emailAddress=you@example.com'
+for key in releasekey platform shared media networkstack sdk_sandbox bluetooth verity; do
+    ~/.android-certs/make_key ~/.android-certs/$key "$subject"
+done
+
+for apex in $(find out/target/product/pipa -name "*.apex" \
+        -exec basename {} .apex \; | sort -u); do
+    ~/.android-certs/make_key ~/.android-certs/$apex "$subject"
+    openssl pkcs8 -in ~/.android-certs/$apex.pk8 -inform DER -nocrypt \
+        -out ~/.android-certs/$apex.pem
+done
+```
+
+Then set `PRODUCT_DEFAULT_DEV_CERTIFICATE` to the platform key, e.g.
+`PRODUCT_DEFAULT_DEV_CERTIFICATE := $(HOME)/.android-certs/releasekey`, locally in
+the product makefile or in the environment (do not commit it). Soong looks for
+the APEX `.pem` files in the same directory as that certificate
+(`ApexKeyDir`). Rebuild the product cleanly afterwards (`rm -rf
+out/target/product/pipa` or `make clobber`): Soong does not always notice a key
+replacement.
+
+Keep `~/.android-certs` offline and out of the repository. Losing these keys
+means you cannot sign updates compatible with already distributed builds.
+
 ### Packages
 
 Without flags, the build produces only the OTA package:
