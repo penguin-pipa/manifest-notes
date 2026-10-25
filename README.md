@@ -4,13 +4,27 @@ Local manifest overlay for Project PenguinOS `celerity` (AOSPA `calcite` / Andro
 
 ## Repositories
 
-This overlay replaces only the two repositories that contain pipa-specific
-changes:
+This overlay replaces the repositories that contain pipa-specific changes:
 
 | Path | Repository | Base |
 | --- | --- | --- |
-| `vendor/aospa` | `penguin-pipa/android_vendor_aospa` | `Project-PenguinOS/android_vendor_aospa` |
+| `vendor/aospa` | `penguin-pipa/android_vendor_aospa` | `PenguinOS-Vanilla/android_vendor_aospa` |
 | `hardware/interfaces` | `penguin-pipa/android_hardware_interfaces` | `Project-PenguinOS/hardware_interfaces` |
+| `frameworks/base` | `penguin-pipa/frameworks_base` | `PenguinOS-Vanilla/frameworks_base` |
+| `frameworks/av` | `penguin-pipa/frameworks_av` | `Project-PenguinOS/frameworks_av` |
+| `packages/apps/ThemePicker` | `penguin-pipa/packages_apps_ThemePicker` | seeded from the build host checkout |
+
+The forks carry only the pipa-relevant deltas from YumeMichi's `aospa-pipa`
+tree: lid state API and telephony null guards (`frameworks/base`), OGG
+metadata with attached streams (`frameworks/av`), font refresh after overlay
+(`ThemePicker`), lid/UVC sepolicy, sysconfig and `qti-telephony-utils`
+(`vendor/aospa`).
+
+`Project-PenguinOS/frameworks_base`, `system_core`,
+`packages_apps_ThemePicker` and `android_vendor_aospa` are no longer
+reachable (HTTP 404). The forks are therefore based on the public
+`PenguinOS-Vanilla` mirrors, rewound to the exact commit checked out on the
+build host, so no PenguinOS change is lost.
 
 Everything else is synced by `vendor/aospa/products/pipa/beans.xml` directly
 from YumeMichi's trees:
@@ -25,9 +39,14 @@ from YumeMichi's trees:
 - `aospa-pipa/android_kernel_build`
 - `aospa-pipa/android_vendor_qcom-opensource_power`
 - `aospa-pipa/android_vendor_qcom-opensource_usb`
+- `aospa-pipa/android_packages_apps_FlipFlap`
 - `aospa-pipa/android_hardware_qcom_audio` (`calcite-865`)
 - `aospa-pipa/android_hardware_qcom_display` (`calcite-865`)
 - `aospa-pipa/android_hardware_qcom_media` (`calcite-865`)
+
+`packages/apps/LMOFreeform` is replaced in this overlay by
+`aospa-pipa/android_packages_apps_LMOFreeform` (`calcite`), cloned directly
+rather than forked.
 
 The three `calcite-865` HALs are mapped by
 `vendor/aospa/products/pipa/kona.xml`; they are not forked into this org.

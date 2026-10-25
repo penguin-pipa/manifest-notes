@@ -15,4 +15,30 @@
            name="penguin-pipa/android_hardware_interfaces"
            remote="github"
            revision="celerity" />
+
+  <!-- PenguinOS forks with the aospa-pipa deltas for pipa -->
+  <remove-project name="Project-PenguinOS/frameworks_base" />
+  <project path="frameworks/base"
+           name="penguin-pipa/frameworks_base"
+           remote="github"
+           revision="celerity" />
+
+  <remove-project name="Project-PenguinOS/frameworks_av" />
+  <project path="frameworks/av"
+           name="penguin-pipa/frameworks_av"
+           remote="github"
+           revision="celerity" />
+
+  <remove-project name="Project-PenguinOS/packages_apps_ThemePicker" />
+  <project path="packages/apps/ThemePicker"
+           name="penguin-pipa/packages_apps_ThemePicker"
+           remote="github"
+           revision="celerity" />
+
+  <!-- Cloned directly from YumeMichi's tree -->
+  <remove-project name="Project-PenguinOS/packages_apps_LMOFreeform" />
+  <project path="packages/apps/LMOFreeform"
+           name="aospa-pipa/android_packages_apps_LMOFreeform"
+           remote="github"
+           revision="calcite" />
 </manifest>
