@@ -12,7 +12,7 @@ This overlay replaces the repositories that contain pipa-specific changes:
 | `hardware/interfaces` | `penguin-pipa/android_hardware_interfaces` | `Project-PenguinOS/hardware_interfaces` |
 | `frameworks/base` | `penguin-pipa/frameworks_base` | PenguinOS `celerity` |
 | `frameworks/av` | `penguin-pipa/frameworks_av` | `Project-PenguinOS/frameworks_av` |
-| `packages/apps/ThemePicker` | `penguin-pipa/packages_apps_ThemePicker` | seeded from the build host checkout |
+| `packages/apps/ThemePicker` | `penguin-pipa/packages_apps_ThemePicker` | `Project-PenguinOS/packages_apps_ThemePicker` |
 
 The forks carry only the pipa-relevant deltas from YumeMichi's `aospa-pipa`
 tree: lid state API and telephony null guards (`frameworks/base`), OGG
