@@ -20,18 +20,23 @@ tree: lid state API and telephony null guards (`frameworks/base`), OGG
 metadata with attached streams (`frameworks/av`), `host_init_verifier` fix
 for overriding services (`system/core`), font refresh after overlay
 (`ThemePicker`), lid/UVC sepolicy, sysconfig and `qti-telephony-utils`
-(`vendor/aospa`).
+(`vendor/aospa`). Since 2026-10-26 each upstream commit is replayed
+individually (`git am` / `cherry-pick -x`), so author and date match
+`aospa-pipa` and every commit ends with `(cherry picked from commit …)`.
 
-Current state of the `Project-PenguinOS` repos (checked 2026-10-25): 51 of
+Current state of the `Project-PenguinOS` repos (checked 2026-10-26): 51 of
 the 54 declared by the base manifest are public. Still unreachable are
-`android_vendor_aospa` (replaced by this overlay) and
+`android_vendor_aospa` (replaced by this overlay; the fork stays on base
+`3cab643` until the upstream is published again) and
 `packages_apps_ParanoidSense`; `vendor_qcom_opensource_power` was renamed to
 `android_vendor_qcom-opensource_power`, so the overlay removes the stale
 `vendor/qcom/opensource/power` path and barista re-declares it from
 `aospa-pipa` at lunch. `ParanoidSense` is listed in `PRODUCT_PACKAGES` of
 `aospa-target.mk` and has no public mirror, so it blocks a from-scratch sync
-and build until it is published again. The forks carry the PenguinOS
-`celerity` base with only the pipa deltas on top.
+and build until it is published again. The other forks are aligned to the
+current upstream heads (`frameworks/base` `44076464`, `frameworks/av`
+`8607414`, `system/core` `666c84ed`, `hardware/interfaces` `da9d966`,
+`packages/apps/ThemePicker` `e1fb80e`).
 
 Everything else is synced by `vendor/aospa/products/pipa/beans.xml` directly
 from YumeMichi's trees:
