@@ -8,9 +8,9 @@ This overlay replaces the repositories that contain pipa-specific changes:
 
 | Path | Repository | Base |
 | --- | --- | --- |
-| `vendor/aospa` | `penguin-pipa/android_vendor_aospa` | `PenguinOS-Vanilla/android_vendor_aospa` |
+| `vendor/aospa` | `penguin-pipa/android_vendor_aospa` | PenguinOS `celerity` |
 | `hardware/interfaces` | `penguin-pipa/android_hardware_interfaces` | `Project-PenguinOS/hardware_interfaces` |
-| `frameworks/base` | `penguin-pipa/frameworks_base` | `PenguinOS-Vanilla/frameworks_base` |
+| `frameworks/base` | `penguin-pipa/frameworks_base` | PenguinOS `celerity` |
 | `frameworks/av` | `penguin-pipa/frameworks_av` | `Project-PenguinOS/frameworks_av` |
 | `packages/apps/ThemePicker` | `penguin-pipa/packages_apps_ThemePicker` | seeded from the build host checkout |
 
@@ -20,11 +20,16 @@ metadata with attached streams (`frameworks/av`), font refresh after overlay
 (`ThemePicker`), lid/UVC sepolicy, sysconfig and `qti-telephony-utils`
 (`vendor/aospa`).
 
-`Project-PenguinOS/frameworks_base`, `system_core`,
-`packages_apps_ThemePicker` and `android_vendor_aospa` are no longer
-reachable (HTTP 404). The forks are therefore based on the public
-`PenguinOS-Vanilla` mirrors, rewound to the exact commit checked out on the
-build host, so no PenguinOS change is lost.
+Current state of the `Project-PenguinOS` repos (checked 2026-10-25): 51 of
+the 54 declared by the base manifest are public. Still unreachable are
+`android_vendor_aospa` (replaced by this overlay) and
+`packages_apps_ParanoidSense`; `vendor_qcom_opensource_power` was renamed to
+`android_vendor_qcom-opensource_power`, so the overlay removes the stale
+`vendor/qcom/opensource/power` path and barista re-declares it from
+`aospa-pipa` at lunch. `ParanoidSense` is listed in `PRODUCT_PACKAGES` of
+`aospa-target.mk` and has no public mirror, so it blocks a from-scratch sync
+and build until it is published again. The forks carry the PenguinOS
+`celerity` base with only the pipa deltas on top.
 
 Everything else is synced by `vendor/aospa/products/pipa/beans.xml` directly
 from YumeMichi's trees:
