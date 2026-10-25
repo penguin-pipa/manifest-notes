@@ -18,9 +18,9 @@ This overlay replaces the repositories that contain pipa-specific changes:
 The forks carry only the pipa-relevant deltas from YumeMichi's `aospa-pipa`
 tree: lid state API and telephony null guards (`frameworks/base`), OGG
 metadata with attached streams (`frameworks/av`), `host_init_verifier` fix
-for overriding services (`system/core`), font refresh after overlay
-(`ThemePicker`), lid/UVC sepolicy, sysconfig and `qti-telephony-utils`
-(`vendor/aospa`). Since 2026-10-26 each upstream commit is replayed
+for overriding services (`system/core`), `kernel_config_t_4.19` in FCM 7
+(`hardware/interfaces`), font refresh after overlay (`ThemePicker`), lid/UVC
+sepolicy, sysconfig and `qti-telephony-utils` (`vendor/aospa`). Since 2026-10-26 each upstream commit is replayed
 individually (`git am` / `cherry-pick -x`), so author and date match
 `aospa-pipa` and every commit ends with `(cherry picked from commit …)`.
 
