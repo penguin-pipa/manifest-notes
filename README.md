@@ -10,13 +10,15 @@ This overlay replaces the repositories that contain pipa-specific changes:
 | --- | --- | --- |
 | `vendor/aospa` | `penguin-pipa/android_vendor_aospa` | PenguinOS `celerity` |
 | `hardware/interfaces` | `penguin-pipa/android_hardware_interfaces` | `Project-PenguinOS/hardware_interfaces` |
+| `system/core` | `penguin-pipa/system_core` | `Project-PenguinOS/system_core` |
 | `frameworks/base` | `penguin-pipa/frameworks_base` | PenguinOS `celerity` |
 | `frameworks/av` | `penguin-pipa/frameworks_av` | `Project-PenguinOS/frameworks_av` |
 | `packages/apps/ThemePicker` | `penguin-pipa/packages_apps_ThemePicker` | `Project-PenguinOS/packages_apps_ThemePicker` |
 
 The forks carry only the pipa-relevant deltas from YumeMichi's `aospa-pipa`
 tree: lid state API and telephony null guards (`frameworks/base`), OGG
-metadata with attached streams (`frameworks/av`), font refresh after overlay
+metadata with attached streams (`frameworks/av`), `host_init_verifier` fix
+for overriding services (`system/core`), font refresh after overlay
 (`ThemePicker`), lid/UVC sepolicy, sysconfig and `qti-telephony-utils`
 (`vendor/aospa`).
 
