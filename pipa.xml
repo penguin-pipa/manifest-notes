@@ -9,9 +9,9 @@
     <linkfile src="build.sh" dest="rom-build.sh" />
   </project>
 
-  <!-- Upstream manifest still points at vendor_qcom_opensource_power, renamed
-       to android_vendor_qcom-opensource_power (and 404 under the old name).
-       Barista re-declares the path from aospa-pipa at lunch. -->
+  <!-- Pipa uses the aospa-pipa fork of vendor/qcom/opensource/power declared
+       in beans.xml; drop the upstream project so barista can re-declare the
+       path at lunch. -->
   <remove-project path="vendor/qcom/opensource/power" optional="true" />
 
   <!-- PenguinOS hardware/interfaces + kernel_config_t_4.19 -->

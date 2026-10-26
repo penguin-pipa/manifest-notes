@@ -24,18 +24,18 @@ sepolicy, sysconfig and `qti-telephony-utils` (`vendor/aospa`). Since 2026-10-26
 individually, so author and date match `aospa-pipa` and every imported
 commit keeps its `(cherry picked from commit …)` line.
 
-Current state of the `Project-PenguinOS` repos (checked 2026-10-26):
-`android_vendor_aospa` is public again and the `vendor/aospa` fork has been
-rebased on its new head `1c51484a`. The only repo still unreachable is
-`packages_apps_ParanoidSense`; `vendor_qcom_opensource_power` was renamed to
-`android_vendor_qcom-opensource_power`, so the overlay removes the stale
-`vendor/qcom/opensource/power` path and barista re-declares it from
-`aospa-pipa` at lunch. `ParanoidSense` is listed in `PRODUCT_PACKAGES` of
-`aospa-target.mk` and has no public mirror, so it blocks a from-scratch sync
-and build until it is published again. The other forks are aligned to the
-current upstream heads (`frameworks/base` `de30bab9`, `frameworks/av`
-`8607414`, `system/core` `666c84ed`, `hardware/interfaces` `da9d966`,
-`packages/apps/ThemePicker` `e1fb80e`).
+Current state of the `Project-PenguinOS` repos (checked 2026-10-26, final
+pass): all 54 repos of the `celerity` manifest are reachable on branch
+`celerity`. `android_vendor_aospa` is public and the `vendor/aospa` fork is
+based on its head `1c51484a`; `packages_apps_ParanoidSense` is published again
+(module `ParanoidSense`), so a from-scratch sync and build are no longer
+blocked. `vendor_qcom_opensource_power` was republished under its old name on
+2026-10-25, but the overlay still removes the `vendor/qcom/opensource/power`
+path so the `aospa-pipa` fork declared in `beans.xml` wins (barista
+re-declares it at lunch). The other forks are aligned to the current upstream
+heads (`frameworks/base` `de30bab9`, `frameworks/av` `8607414`, `system/core`
+`666c84ed`, `hardware/interfaces` `da9d966`, `packages/apps/ThemePicker`
+`e1fb80e`).
 
 Everything else is synced by `vendor/aospa/products/pipa/beans.xml` directly
 from YumeMichi's trees:
