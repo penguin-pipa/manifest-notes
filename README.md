@@ -14,15 +14,19 @@ This overlay replaces the repositories that contain pipa-specific changes:
 | `frameworks/base` | `penguin-pipa/frameworks_base` | PenguinOS `celerity` |
 | `frameworks/av` | `penguin-pipa/frameworks_av` | `Project-PenguinOS/frameworks_av` |
 | `packages/apps/ThemePicker` | `penguin-pipa/packages_apps_ThemePicker` | `Project-PenguinOS/packages_apps_ThemePicker` |
+| `device/qcom/common` | `penguin-pipa/device_qcom_common` | `Project-PenguinOS/device_qcom_common` |
 
 The forks carry only the pipa-relevant deltas from YumeMichi's `aospa-pipa`
 tree: lid state API and telephony null guards (`frameworks/base`), OGG
 metadata with attached streams (`frameworks/av`), `host_init_verifier` fix
 for overriding services (`system/core`), `kernel_config_t_4.19` in FCM 7
 (`hardware/interfaces`), font refresh after overlay (`ThemePicker`), lid/UVC
-sepolicy, sysconfig and `qti-telephony-utils` (`vendor/aospa`). Since 2026-10-26 each upstream commit is replayed
+sepolicy, sysconfig and `qti-telephony-utils` (`vendor/aospa`), kona perf
+configs and the media component fixup (`device/qcom/common`). Since 2026-10-26 each upstream commit is replayed
 individually, so author and date match `aospa-pipa` and every imported
-commit keeps its `(cherry picked from commit …)` line.
+commit keeps its `(cherry picked from commit …)` line. `device/qcom/common`
+is forked instead of cloned because the AOSPA-based `aospa-pipa` tree ships
+`sepolicy/aospa/private/hub_app.te`, which does not compile on PenguinOS.
 
 Current state of the `Project-PenguinOS` repos (checked 2026-10-26, final
 pass): all 54 repos of the `celerity` manifest are reachable on branch
@@ -45,7 +49,6 @@ from YumeMichi's trees:
 - `aospa-pipa/android_kernel_configs`
 - `aospa-pipa/android_hardware_xiaomi`
 - `aospa-pipa/android_hardware_dolby`
-- `aospa-pipa/android_device_qcom_common`
 - `aospa-pipa/android_device_qcom_sepolicy_vndr`
 - `aospa-pipa/android_kernel_build`
 - `aospa-pipa/android_vendor_qcom-opensource_power`
