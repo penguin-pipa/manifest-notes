@@ -1,5 +1,14 @@
 # PenguinOS for Xiaomi Pad 6 (`pipa`)
 
+> **Superseded (2026-10-26).** This repository is kept for reference only.
+> The build now uses a direct fork of
+> [`Project-PenguinOS/manifest`](https://github.com/penguin-pipa/manifest):
+> every override listed below lives in that fork's own `pipa.xml`
+> (commits `manifest: Track our forks` and `manifest: Adapt for pipa`), so
+> no local manifest is needed and barista no longer has to remove the same
+> paths at lunch. The files in this repository document the old overlay
+> approach and are no longer synced.
+
 Local manifest overlay for Project PenguinOS `celerity` (AOSPA `calcite` / Android 17).
 
 ## Repositories
@@ -68,14 +77,17 @@ The three `calcite-865` HALs are mapped by
 ## Build
 
 ```bash
-repo init -u https://github.com/Project-PenguinOS/manifest -b celerity --depth=1
-mkdir -p .repo/local_manifests
-curl -L https://raw.githubusercontent.com/penguin-pipa/manifest/celerity/pipa.xml \
-    -o .repo/local_manifests/pipa.xml
+repo init -u https://github.com/penguin-pipa/manifest -b celerity --depth=1
 repo sync -j"$(nproc)"
 
 ./rom-build.sh pipa
 ```
+
+The fork is based on `Project-PenguinOS/manifest` `celerity` and includes its
+own `pipa.xml` from `default.xml`. The old overlay flow
+(`curl` of this repository's `pipa.xml` into `.repo/local_manifests/`) is no
+longer used: the same overrides are part of the manifest fork, which is what
+keeps barista from generating conflicting `remove-project` entries.
 
 `--depth=1` makes every project a shallow clone (latest commit only), which
 saves tens of GB and speeds up the first sync; the build does not need
