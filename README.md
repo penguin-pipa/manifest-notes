@@ -65,7 +65,7 @@ The three `calcite-865` HALs are mapped by
 ## Build
 
 ```bash
-repo init -u https://github.com/Project-PenguinOS/manifest -b celerity
+repo init -u https://github.com/Project-PenguinOS/manifest -b celerity --depth=1
 mkdir -p .repo/local_manifests
 curl -L https://raw.githubusercontent.com/penguin-pipa/manifest/celerity/pipa.xml \
     -o .repo/local_manifests/pipa.xml
@@ -73,6 +73,12 @@ repo sync -j"$(nproc)"
 
 ./rom-build.sh pipa
 ```
+
+`--depth=1` makes every project a shallow clone (latest commit only), which
+saves tens of GB and speeds up the first sync; the build does not need
+history. The setting is stored in the tree, so later `repo sync` runs
+(including `-r` and `--force-sync`) keep it. Only re-run `repo init` without
+`--depth` followed by `repo sync` if you need the full history.
 
 In this setup the synced AOSP/PenguinOS tree and the build outputs live on
 the project's build host under `~/penguinos`; this repository only carries
