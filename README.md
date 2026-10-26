@@ -21,20 +21,19 @@ metadata with attached streams (`frameworks/av`), `host_init_verifier` fix
 for overriding services (`system/core`), `kernel_config_t_4.19` in FCM 7
 (`hardware/interfaces`), font refresh after overlay (`ThemePicker`), lid/UVC
 sepolicy, sysconfig and `qti-telephony-utils` (`vendor/aospa`). Since 2026-10-26 each upstream commit is replayed
-individually (`git am` / `cherry-pick -x`), so author and date match
-`aospa-pipa` and every commit ends with `(cherry picked from commit …)`.
+individually, so author and date match `aospa-pipa` and every imported
+commit keeps its `(cherry picked from commit …)` line.
 
-Current state of the `Project-PenguinOS` repos (checked 2026-10-26): 51 of
-the 54 declared by the base manifest are public. Still unreachable are
-`android_vendor_aospa` (replaced by this overlay; the fork stays on base
-`3cab643` until the upstream is published again) and
+Current state of the `Project-PenguinOS` repos (checked 2026-10-26):
+`android_vendor_aospa` is public again and the `vendor/aospa` fork has been
+rebased on its new head `1c51484a`. The only repo still unreachable is
 `packages_apps_ParanoidSense`; `vendor_qcom_opensource_power` was renamed to
 `android_vendor_qcom-opensource_power`, so the overlay removes the stale
 `vendor/qcom/opensource/power` path and barista re-declares it from
 `aospa-pipa` at lunch. `ParanoidSense` is listed in `PRODUCT_PACKAGES` of
 `aospa-target.mk` and has no public mirror, so it blocks a from-scratch sync
 and build until it is published again. The other forks are aligned to the
-current upstream heads (`frameworks/base` `44076464`, `frameworks/av`
+current upstream heads (`frameworks/base` `de30bab9`, `frameworks/av`
 `8607414`, `system/core` `666c84ed`, `hardware/interfaces` `da9d966`,
 `packages/apps/ThemePicker` `e1fb80e`).
 
@@ -88,9 +87,10 @@ invokes `vendor/aospa/build/tools/barista.py`, which creates
 YumeMichi's device-common forks and the `calcite-865` HALs. Do not invoke
 barista manually in the normal build flow.
 
-Barista needs `vendor/aospa` at commit `e6ddfbf` or newer: older copies filter
-the sync list with `repo list --path-only`, which on repo v2.x drops every
-project that is not checked out yet, so the device tree is never downloaded.
+Barista needs `vendor/aospa` at commit `46819e00` or newer: older copies
+filter the sync list with `repo list --path-only`, which on repo v2.x drops
+every project that is not checked out yet, so the device tree is never
+downloaded.
 
 ### Variants
 
